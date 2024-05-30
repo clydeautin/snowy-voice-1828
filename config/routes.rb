@@ -5,8 +5,13 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   get "/guests/:id", to: "guests#show"
+  # resources :guests, only: :show
   
-  post "/guest_rooms", to: "guest_rooms#add_room"
+  post "/guests/:id/rooms", to: "guest_rooms#create"
+  # resources :guests, only: [show] do
+  #   resources :rooms, only: :create, controller: :room_guests
+  # end
+
 
   get "/rooms", to: "rooms#index"
 end

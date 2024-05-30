@@ -4,13 +4,16 @@
 
 <ul>
   <% @guest.rooms.each do |room| %>
+  <div id="room-<%= room.id %>">
   <p>Suite: <%= room.suite %></p>
-  <p>Cost: $<%= room.rate %></p>
-  <p>Hotel Name: <%= room.hotel.name %></p>
+  <p>Rate: $<%= room.rate %></p>
+  <p>Hotel: <%= room.hotel.name %></p>
+  </div>
   <% end %>
 </ul>
 
-<%= form_with url: "/guest_rooms?guest_id=#{@guest.id}", method: :post, local:true do |form| %>
+<%= form_with url: "/guests/#{@guest.id}/rooms", method: :post, local: true, data: { turbo: false } do |form| %>
+  <%= form.label :room_id %>
   <%= form.text_field :room_id %>
   <%= form.submit "Add Room" %>
 <% end %>
